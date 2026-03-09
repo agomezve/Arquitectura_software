@@ -1,5 +1,6 @@
 from django.db import models
 
+# Create your models here.
 class Cliente(models.Model):
     nombre = models.CharField(max_length=100)
     telefono = models.CharField(max_length=15)
@@ -7,7 +8,7 @@ class Cliente(models.Model):
 
     def __str__(self):
         return self.nombre
-    
+
 class Coche(models.Model):
     cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE)
     marca = models.CharField(max_length=50)
@@ -16,7 +17,7 @@ class Coche(models.Model):
 
     def __str__(self):
         return f"{self.marca} {self.modelo} - {self.matricula}"
-
+    
 class Servicio(models.Model):
     nombre = models.CharField(max_length=100)
     descripcion = models.TextField()
@@ -24,7 +25,7 @@ class Servicio(models.Model):
 
     def __str__(self):
         return self.nombre
-
+    
 class CocheServicio(models.Model):
     coche = models.ForeignKey(Coche, on_delete=models.CASCADE)
     servicio = models.ForeignKey(Servicio, on_delete=models.CASCADE)
