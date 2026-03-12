@@ -1,4 +1,3 @@
-
 """
 WSGI config for taller_coches project.
 
