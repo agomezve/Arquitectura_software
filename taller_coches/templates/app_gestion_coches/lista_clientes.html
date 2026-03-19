@@ -27,5 +27,10 @@
         {% endfor %}
         </tbody>
     </table>
+    <br><br>
+    <a href="{% url 'nuevo_cliente' %}">Añadir nuevo cliente</a> | 
+    <a href="{% url 'nuevo_coche' %}">Añadir nuevo coche</a> | 
+    <a href="{% url 'nuevo_servicio' %}">Añadir nuevo servicio</a> | 
+    <a href="{% url 'coche_servicio' %}">Vincular coche a servicio</a>
 </body>
 </html>

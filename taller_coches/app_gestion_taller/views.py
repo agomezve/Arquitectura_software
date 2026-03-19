@@ -4,6 +4,9 @@ from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
 import json
 from .models import Cliente, Coche, Servicio, CocheServicio
+from django.shortcuts import render, redirect
+from .forms import ClienteForm, CocheForm, ServicioForm, CocheServicioForm
+
 
 def lista_clientes(request):
     clientes = list(Cliente.objects.values("id", "nombre", "telefono", "email"))
@@ -194,3 +197,53 @@ def buscar_servicios_de_coche(request, coche_id):
         return render(request, 'app_gestion_coches/servicios_coche.html', contexto)
     except Coche.DoesNotExist:
         return JsonResponse({"error": "Coche no encontrado"}, status=404)
+
+def nuevo_cliente(request):
+    if request.method == 'POST':
+        form = ClienteForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('lista_clientes')
+    else:
+        form = ClienteForm()
+    return render(request, 'formulario.html', {'form': form, 'titulo': 'Nuevo Cliente'})
+
+def nuevo_coche(request):
+    if request.method == 'POST':
+        form = CocheForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('lista_clientes')
+    else:
+        form = CocheForm()
+    return render(request, 'formulario.html', {'form': form, 'titulo': 'Nuevo Coche'})
+    
+def nuevo_servicio(request):
+    if request.method == 'POST':
+        form = ServicioForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('lista_clientes')
+    else:
+        form = ServicioForm()
+    return render(request, 'formulario.html', {'form': form, 'titulo': 'Nuevo Servicio'})
+
+def nuevo_cliente(request):
+    if request.method == 'POST':
+        form = ClienteForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('lista_clientes')
+    else:
+        form = ClienteForm()
+    return render(request, 'formulario.html', {'form': form, 'titulo': 'Nuevo Cliente'})
+
+def coche_servicio(request):
+    if request.method == 'POST':
+        form = CocheServicioForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('lista_clientes')
+    else:
+        form = CocheServicioForm()
+    return render(request, 'formulario.html', {'form': form, 'titulo': 'Nuevo  Coche-Servicio'})
